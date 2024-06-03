@@ -12,19 +12,73 @@ import { toast, Toaster } from 'react-hot-toast';
 
 export default function RegistrationPage() {
   const [isLoading, setLoading] = useState(false)
+  const emailRef = useRef<HTMLInputElement>(null)
   const usernameRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
+  const passwordAgainRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   const registration = async () => {
     setLoading(true)
     const username = usernameRef.current?.value
     const password = passwordRef.current?.value
+    const passwordAgain = passwordAgainRef.current?.value
+    const email = emailRef.current?.value
+
+    if (email == ''){
+      toast.error(
+        "Поле Email не должно быть пустым!",
+        {
+          position: 'bottom-center',
+          duration: 1000
+        }
+      )
+      setLoading(false)
+      return
+    }
+
+    if (username == ''){
+      toast.error(
+        "Поле Username не должно быть пустым!",
+        {
+          position: 'bottom-center',
+          duration: 1000
+        }
+      )
+      setLoading(false)
+      return
+    }
+
+    if (password == ''){
+      toast.error(
+        "Поле Password не должно быть пустым!",
+        {
+          position: 'bottom-center',
+          duration: 1000
+        }
+      )
+      setLoading(false)
+      return
+    }
+
+    if (password != passwordAgain){
+      toast.error(
+        "Пароли не совпадают!",
+        {
+          position: 'bottom-center',
+          duration: 1000
+        }
+      )
+      setLoading(false)
+      return
+    }
+
     try{
       const response = await axios.post(
-        `${ApiConfig.baseUrl}/auth/username`, {
+        `${ApiConfig.baseUrl}/auth/register`, {
           username: username,
-          password: password
+          password: password,
+          email: email
         }
       )
       const data: AuthResponse = response.data
@@ -34,7 +88,7 @@ export default function RegistrationPage() {
     }
     catch(error){
       toast.error(
-        "Неправильный логин или пароль!",
+        "Ошибка сервера!",
         {
           position: 'bottom-center',
           duration: 1000
@@ -67,13 +121,29 @@ export default function RegistrationPage() {
 
           <p className={style.logo_text}>PlanIt</p>
         </span>
-        <p className={style.sign_in_text}>Войдите, чтобы продолжить</p>
+        <p className={style.sign_in_text}>Зарегистрируйтесь, чтобы продолжить</p>
+        <Input 
+          ref={emailRef}
+          type="email" 
+          label="Email" 
+          variant="bordered"
+          classNames={{
+            base: 'mt-[20px]',
+            input: 'text-black',
+            inputWrapper: [
+              'border-2',
+              'border-black',
+              'group-data-[focus=true]:border-black'
+            ]
+          }}
+        />
         <Input 
           ref={usernameRef}
           type="text" 
           label="Username" 
           variant="bordered"
           classNames={{
+            base: 'mt-[20px]',
             input: 'text-black',
             inputWrapper: [
               'border-2',
@@ -97,12 +167,27 @@ export default function RegistrationPage() {
             ]
           }}
         />
+        <Input 
+          ref={passwordAgainRef}
+          type="password" 
+          label="Password again" 
+          variant="bordered"
+          classNames={{
+            base: 'mt-[20px]',
+            input: 'text-black',
+            inputWrapper: [
+              'border-2',
+              'border-black',
+              'group-data-[focus=true]:border-black'
+            ]
+          }}
+        />
         <Button
           className='mt-[20px] w-full'
           isLoading={isLoading}
           onClick={registration}
         >
-          Войти
+          Зарегистроваться
         </Button>
 
       </div>

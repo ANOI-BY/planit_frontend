@@ -106,9 +106,9 @@ export default function IndexPage() {
         </Button>
         <Link 
           style={{
-            marginTop: '10px'
+            marginTop: '10px',
+            cursor: 'pointer'
           }} 
-          href="#"
           onClick={() => router.push('/registration')}
         >Регистрация</Link>
 

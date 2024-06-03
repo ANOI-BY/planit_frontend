@@ -20,13 +20,14 @@ export const getServerSideProps = (async (ctx) => {
     const tableId = ctx.params?.id;
 
     const cookies = nookies.get(ctx)
+    console.log(cookies)
     const token = cookies.accessToken
 
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     }
 
-    // console.log(config)
+    // console.log(tableId)
     try{
         const table = await axios.get(
             `${ApiConfig.baseUrl}/tables/${tableId}`, config
@@ -36,6 +37,7 @@ export const getServerSideProps = (async (ctx) => {
         return { props: { repo } }
     }
     catch(error){
+        // console.log(error)
         const repo: TablesResponseItem | null = null
         return { props: { repo } }
     }
@@ -106,6 +108,7 @@ export default function TableView({
         }
     }
 
+    console.log(repo)
 
     if (repo == null){
         return (
@@ -153,7 +156,7 @@ export default function TableView({
                         }
 
                         <Button className={style.create_column} onClick={onOpenChange}>
-                            + Добавьте еще одну колонку
+                            + Добавьте колонку
                         </Button>
                     </div>
                 </DndProvider>
