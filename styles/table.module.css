@@ -1,0 +1,153 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0 20px 100px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.exit {
+    cursor: pointer;
+    user-select: none;
+    margin-right: 100px;
+}
+
+.columns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0 50px;
+    margin-top: 20px;
+    height: 100%;
+    flex: 1;
+    align-items: start;
+
+    padding: 0 20px;
+    
+    overflow-x: scroll;
+}
+
+.create_column {
+    user-select: none;
+    cursor: pointer;
+
+    background-color: #0038FF;
+    width: 250px;
+    min-width: 250px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+    box-shadow: 0 0 20px 0 #0037ffa7;
+}
+
+.column_block{
+    width: 250px;
+    min-width: 250px;
+
+    background-color: #4c799cb6;
+    border-radius: 10px;
+
+    padding: 10px;
+
+    box-shadow: 0 0 20px 0 #4c799cb6;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.column_block p{
+    color: white;
+    word-break: break-all;
+}
+
+.column_add_task {
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.column_add_task:hover {
+    background-color: rgba(0, 0, 0, 0.643);
+}
+
+.column_add_task_button {
+    /* margin-top: 10px; */
+}
+
+.column_add_task_close {
+    user-select: none;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 12px;
+}
+
+.column_add_task_close:hover {
+    background-color: rgba(0, 0, 0, 0.643);
+}
+
+.hidden {
+    display: none;
+}
+
+.task_block {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.task {
+    border-radius: 10px;
+    width: 100%;
+
+    background-color: rgba(0, 0, 0, 0.643);
+
+    cursor: pointer;
+    user-select: none;
+
+    padding: 5px 10px;
+
+    border: transparent 2px solid;
+    transition: 300ms ease-in-out;
+}
+
+.task:hover {
+    border: #0037ffb9 2px solid;
+}
+
+.drop_block {
+    height: 40px;
+    border-radius: 10px;
+    background-color: #0000009e;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 550px) {
+    .main {
+        padding: 40px 0 20px 20px;
+    }
+
+    .columns {
+        flex: 10;
+        height: 100%;
+    }
+
+    .exit {
+        margin-right: 20px;
+    }
+}
